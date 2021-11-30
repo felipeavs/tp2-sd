@@ -85,7 +85,7 @@ public class SingleUser {
         PubSubClient user = new PubSubClient(userAddress, userPort);
         setUser(user);
         user.subscribe(brokerAddress, brokerPort);
-        StartTP(user, userName, brokerPort, userAddress);
+        StartTP(user, userName, brokerPort, brokerAddress);
     }
 
     private void StartTP(PubSubClient user, String userName, int brokerPort, String brokerAdd){
