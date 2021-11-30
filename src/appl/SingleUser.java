@@ -92,7 +92,7 @@ public class SingleUser {
         String[] resorces = {"x"};
         Random seed = new Random();
 
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 15; i++){
             String oneResorse = resorces[seed.nextInt(resorces.length)];
             setResource(oneResorse);
             Thread sendOneMessage = new ThreadWrapper(user, userName+":acquire:"+oneResorse, brokerAdd, brokerPort);
@@ -173,15 +173,16 @@ public class SingleUser {
                 else {
                     try {
                         Thread.currentThread().sleep(randomInterval);
-                        logUser = getUser().getLogMessages();
                         hasRelease = true;
 
+                        releases.clear();
+                        logUser = getUser().getLogMessages();
                         it = logUser.iterator();
                         while(it.hasNext()){
                             Message log = it.next();
                             String content = log.getContent();
-                            if (content.contains(":acquire:")){
-                                acquires.add(content);
+                            if (content.contains(":release:")){
+                                releases.add(content);
                             }
                         }
 
